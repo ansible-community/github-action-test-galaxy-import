@@ -1,0 +1,67 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Test Galaxy import
+'on':
+  workflow_call:
+    inputs:
+      build-python-version:
+        description: >-
+          The Python version to use.
+        type: string
+        default: '3.12'
+      import-python-version:
+        description: |-
+          The Python version to use.
+
+          Note that 3.12 currently does not work due to https://github.com/madpah/requirements-parser/issues/88.
+        type: string
+        default: '3.11'
+      ansible-core-version:
+        description: >-
+          The branch of tag name of ansible-core to install.
+        type: string
+        default: 'stable-2.16'
+      subdirectory:
+        description: >-
+          The subdirectory inside the collection's repo which contains the collection's root (`galaxy.yml` file).
+        type: string
+        default: .
+
+jobs:
+  build-collection:
+    name: Build collection artifact
+    permissions:
+      contents: read
+    uses: ansible-community/github-action-build-collection/.github/workflows/build-collection.yml@main
+    with:
+      python-version: ${{ inputs.build-python-version }}
+      ansible-core-version: ${{ inputs.ansible-core-version }}
+      subdirectory: ${{ inputs.subdirectory }}
+
+  import-galaxy:
+    name: Import artifact with Galaxy importer
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs:
+      - build-collection
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build-collection.outputs.artifact-name }}
+
+      - name: List files
+        run: ls -la
+
+      - name: Test import
+        uses: ansible-community/github-action-test-galaxy-import@main
+        id: build-collection
+        with:
+          python-version: ${{ inputs.import-python-version }}
+          ansible-core-version: ${{ inputs.ansible-core-version }}
+          collection-requirements-path: requirements.yml
+          artifact-path: ${{ needs.build-collection.outputs.artifact-filename }}

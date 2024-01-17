@@ -1,0 +1,59 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Test to import an Ansible collection with the Galaxy importer
+description: >-
+  This action tries to import a built Ansible collection artifact with the Ansible Galaxy importer.
+author: "Felix Fontein (@felixfontein)"
+inputs:
+  python-version:
+    description: |-
+      The Python version to use.
+
+      Note that 3.12 currently does not work due to https://github.com/madpah/requirements-parser/issues/88.
+    default: '3.11'
+  ansible-core-version:
+    description: >-
+      The branch of tag name of ansible-core to install.
+    default: 'stable-2.16'
+  collection-requirements-path:
+    description: >-
+      Path to a Galaxy requirements file. If present, these collections will be installed.
+  artifact-path:
+    description: >-
+      Path to the collection's build artifact (tarball).
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install ansible-core
+      shell: bash
+      env:
+        ANSIBLE_CORE_VERSION: ${{ inputs.ansible-core-version }}
+      run: pip install "https://github.com/ansible/ansible/archive/${ANSIBLE_CORE_VERSION}.tar.gz" --disable-pip-version-check
+
+    - name: Install galaxy-importer
+      shell: bash
+      run: pip install galaxy-importer --disable-pip-version-check
+
+    - name: Install collection dependencies
+      if: >-
+        !!inputs.collection-requirements-path
+      shell: bash
+      env:
+        COLLECTION_REQUIREMENTS_PATH: ${{ inputs.collection-requirements-path }}
+      run: |
+        ansible-galaxy collection install --pre --requirements-file "${COLLECTION_REQUIREMENTS_PATH}"
+
+    - name: Run Galaxy importer
+      shell: bash
+      env:
+        ARTIFACT_PATH: ${{ inputs.artifact-path }}
+      run: python -m galaxy_importer.main "${ARTIFACT_PATH}"
