@@ -63,6 +63,7 @@ runs:
     - name: Analyze result
       shell: python
       run: |
+        # Analyze result
         error_prefix = 'ERROR:'
         with open('import.log', 'r', encoding='utf-8') as f:
             for line in f:
