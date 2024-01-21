@@ -57,4 +57,15 @@ runs:
       shell: bash
       env:
         ARTIFACT_PATH: ${{ inputs.artifact-path }}
-      run: python -m galaxy_importer.main "${ARTIFACT_PATH}"
+      run: |
+        python -m galaxy_importer.main "${ARTIFACT_PATH}" | tee import.log
+
+    - name: Analyze result
+      shell: python
+      run: |
+        error_prefix = 'ERROR:'
+        with open('import.log', 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.startswith(error_prefix):
+                    msg = line[len(error_prefix):].strip()
+                    print(f"::warning::Galaxy importer emitted the following non-fatal error: {msg}")
