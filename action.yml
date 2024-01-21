@@ -17,6 +17,7 @@ inputs:
   ansible-core-version:
     description: >-
       The branch of tag name of ansible-core to install.
+      This is assumed to exist in https://github.com/ansible/ansible.
     default: 'stable-2.16'
   collection-requirements-path:
     description: >-
