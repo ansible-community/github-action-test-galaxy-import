@@ -7,6 +7,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 # GitHub Action for testing importing an Ansible collection with the Galaxy importer
 
 [![Linting](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/linting.yml/badge.svg)](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/linting.yml)
+[![Tests](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/tests.yml/badge.svg)](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/tests.yml)
 [![REUSE](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/reuse.yml/badge.svg)](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/reuse.yml)
 
 A composite GitHub Action that allows to test importing a built Ansible collection with the [Galaxy importer](https://github.com/ansible/galaxy-importer) in GitHub Actions CI/CD workflows.
@@ -30,6 +31,12 @@ To use the action, add the following step to your workflow file (for example `.g
 
 The follow options can be provided to this GitHub Action.
 
+### `artifact-path`
+
+Path to the collection's build artifact (tarball).
+
+**(REQUIRED)**
+
 ### `python-version`
 
 The Python version to use.
@@ -49,11 +56,10 @@ This is assumed to exist in https://github.com/ansible/ansible.
 
 Path to a Galaxy requirements file. If present, these collections will be installed.
 
-### `artifact-path`
+### `importer-config-path`
 
-Path to the collection's build artifact (tarball).
-
-**(REQUIRED)**
+Path to a Galaxy importer configuration file.
+See https://github.com/ansible/galaxy-importer#configuration for more information.
 
 ## Bundled shared workflow
 

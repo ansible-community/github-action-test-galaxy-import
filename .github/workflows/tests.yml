@@ -1,0 +1,45 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Action testing
+
+'on':
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # Run once per week (Friday at 07:00 UTC)
+  schedule:
+    - cron: '0 7 * * 5'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          # This should **NOT** be the Python version used for the action itself
+          python-version: 3.12
+
+      - name: Install ansible-core
+        run: pip install ansible-core
+
+      - name: Build collection
+        run: |
+          ansible-galaxy collection build
+          mv foo-bar-1.2.3.tar.gz ..
+          ls -lah ..
+        working-directory: tests/foo.bar
+
+      - name: Run action
+        id: action
+        uses: ./
+        with:
+          artifact-path: tests/foo-bar-1.2.3.tar.gz
