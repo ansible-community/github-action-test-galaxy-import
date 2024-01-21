@@ -7,6 +7,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 # GitHub Action for testing importing an Ansible collection with the Galaxy importer
 
 [![Linting](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/linting.yml/badge.svg)](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/linting.yml)
+[![Tests](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/tests.yml/badge.svg)](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/tests.yml)
 [![REUSE](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/reuse.yml/badge.svg)](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/reuse.yml)
 
 A composite GitHub Action that allows to test importing a built Ansible collection with the [Galaxy importer](https://github.com/ansible/galaxy-importer) in GitHub Actions CI/CD workflows.
