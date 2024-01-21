@@ -30,6 +30,12 @@ To use the action, add the following step to your workflow file (for example `.g
 
 The follow options can be provided to this GitHub Action.
 
+### `artifact-path`
+
+Path to the collection's build artifact (tarball).
+
+**(REQUIRED)**
+
 ### `python-version`
 
 The Python version to use.
@@ -49,11 +55,10 @@ This is assumed to exist in https://github.com/ansible/ansible.
 
 Path to a Galaxy requirements file. If present, these collections will be installed.
 
-### `artifact-path`
+### `importer-config-path`
 
-Path to the collection's build artifact (tarball).
-
-**(REQUIRED)**
+Path to a Galaxy importer configuration file.
+See https://github.com/ansible/galaxy-importer#configuration for more information.
 
 ## Bundled shared workflow
 
