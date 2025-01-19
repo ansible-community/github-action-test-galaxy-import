@@ -13,16 +13,14 @@ inputs:
       Path to the collection's build artifact (tarball).
     required: true
   python-version:
-    description: |-
+    description: >-
       The Python version to use.
-
-      Note that 3.12 currently does not work due to https://github.com/madpah/requirements-parser/issues/88.
-    default: '3.11'
+    default: '3.13'
   ansible-core-version:
     description: >-
       The branch of tag name of ansible-core to install.
       This is assumed to exist in https://github.com/ansible/ansible.
-    default: 'stable-2.16'
+    default: 'stable-2.18'
   collection-requirements-path:
     description: >-
       Path to a Galaxy requirements file. If present, these collections will be installed.
