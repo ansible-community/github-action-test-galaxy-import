@@ -9,21 +9,19 @@ name: Test Galaxy import
     inputs:
       build-python-version:
         description: >-
-          The Python version to use.
+          The Python version to use for building the collection.
         type: string
-        default: '3.12'
+        default: '3.13'
       import-python-version:
-        description: |-
-          The Python version to use.
-
-          Note that 3.12 currently does not work due to https://github.com/madpah/requirements-parser/issues/88.
+        description: >-
+          The Python version to use for Galaxy import.
         type: string
-        default: '3.11'
+        default: '3.13'
       ansible-core-version:
         description: >-
           The branch of tag name of ansible-core to install.
         type: string
-        default: 'stable-2.16'
+        default: 'stable-2.18'
       subdirectory:
         description: >-
           The subdirectory inside the collection's repo which contains the collection's root (`galaxy.yml` file).
