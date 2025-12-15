@@ -48,7 +48,7 @@ jobs:
       - build-collection
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: ${{ needs.build-collection.outputs.artifact-name }}
 
