@@ -40,6 +40,6 @@ jobs:
 
       - name: Run action
         id: action
-        uses: ./
+        uses: $/
         with:
           artifact-path: tests/foo-bar-1.2.3.tar.gz

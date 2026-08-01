@@ -56,7 +56,7 @@ jobs:
         run: ls -la
 
       - name: Test import
-        uses: ansible-community/github-action-test-galaxy-import@main
+        uses: $/
         id: build-collection
         with:
           python-version: ${{ inputs.import-python-version }}
