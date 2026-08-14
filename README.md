@@ -10,6 +10,11 @@ SPDX-License-Identifier: GPL-3.0-or-later
 [![Tests](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/tests.yml/badge.svg)](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/tests.yml)
 [![REUSE](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/reuse.yml/badge.svg)](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/reuse.yml)
 
+> [!WARNING]
+> This GitHub Action is about to be deprecated and archived.
+> Please use another tool instead, for example [antsibull-nox](https://docs.ansible.com/projects/antsibull-nox/)
+> or [tox-ansible](https://docs.ansible.com/projects/tox-ansible/).
+
 A composite GitHub Action that allows to test importing a built Ansible collection with the [Galaxy importer](https://github.com/ansible/galaxy-importer) in GitHub Actions CI/CD workflows.
 
 While this action can be used directly in workflows, we suggest to use the [bundled shared workflow](#bundled-shared-workflow).
