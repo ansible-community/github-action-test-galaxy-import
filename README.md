@@ -11,7 +11,8 @@ SPDX-License-Identifier: GPL-3.0-or-later
 [![REUSE](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/reuse.yml/badge.svg)](https://github.com/ansible-community/github-action-test-galaxy-import/actions/workflows/reuse.yml)
 
 > [!WARNING]
-> This GitHub Action is about to be deprecated and archived.
+> This GitHub Action is deprecated and will be archived in February 2027.
+> See [issue #19](https://github.com/ansible-community/github-action-test-galaxy-import/issues/19) for the deprecation timeline and migration guidance.
 > Please use another tool instead, for example [antsibull-nox](https://docs.ansible.com/projects/antsibull-nox/)
 > or [tox-ansible](https://docs.ansible.com/projects/tox-ansible/).
 
